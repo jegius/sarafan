@@ -5,7 +5,7 @@
             <v-btn flat
                    v-if="profile"
                    :disabled="$route.path === '/'"
-                    @click="showMessages"
+                   @click="showMessages"
             >
                 Messages
             </v-btn>
@@ -13,8 +13,9 @@
             <v-btn flat
                    v-if="profile"
                    :disabled="$route.path === '/profile'"
-                    @click="showProfile"
-            >{{profile.name}}</v-btn>
+                   @click="showProfile"
+            >{{profile.name}}
+            </v-btn>
             <v-btn v-if="profile" icon href="/logout">
                 <v-icon>exit_to_app</v-icon>
             </v-btn>
@@ -34,10 +35,11 @@
         computed: mapState(['profile']),
         methods: {
             ...mapMutations([
-                             'addMethodMutations',
-                             'updateMethodMutations',
-                             'removeMethodMutations',
-                         ]),
+                'addMethodMutations',
+                'updateMethodMutations',
+                'removeMethodMutations',
+                'addCommentMutations'
+            ]),
             showMessages() {
                 this.$router.push('/')
             },
@@ -58,6 +60,14 @@
                         case 'REMOVE':
                             this.removeMethodMutations(data.body)
                             break;
+                        default:
+                            console.error(`Looks like the event type is unknown "${data.eventType}"`)
+                    }
+                } else if (data.objectType === 'COMMENT') {
+                    switch (data.eventType) {
+                        case 'CREATE':
+                            this.addCommentMutations(data.body)
+                            break
                         default:
                             console.error(`Looks like the event type is unknown "${data.eventType}"`)
                     }

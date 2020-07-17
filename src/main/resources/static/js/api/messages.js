@@ -11,5 +11,8 @@ export default {
     },
     remove({id}) {
         return messages.remove({id})
+    },
+    page(page) {
+        return Vue.http.get('/message', {params: {page}})
     }
 }
