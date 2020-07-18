@@ -8,7 +8,7 @@ import 'vuetify/dist/vuetify.min.css'
 import store from 'store/store'
 import router from 'router/router'
 
-if (frontendData.profile) {
+if (profile) {
     connect()
 }
 

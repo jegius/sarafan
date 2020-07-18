@@ -21,7 +21,7 @@
         data() {
             return {
                 text: '',
-                id: '',
+                id: null,
             }
         },
         watch: {
@@ -46,7 +46,7 @@
                     this.addMethodAction(message)
 
                 this.text = ''
-                this.id = ''
+                this.id = null
             }
         }
     }

@@ -44,6 +44,7 @@ public class MessageController {
     }
 
     @PostMapping
+    @JsonView({Views.FullMessage.class})
     public Message create(
             @RequestBody Message message,
             @AuthenticationPrincipal User user
@@ -52,6 +53,7 @@ public class MessageController {
     }
 
     @PutMapping("{id}")
+    @JsonView({Views.FullMessage.class})
     public Message update(
             @PathVariable("id") Long messageId,
             @RequestBody Message message

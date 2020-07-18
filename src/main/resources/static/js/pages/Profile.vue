@@ -13,9 +13,20 @@
                             <v-flex><b>Locale:</b> {{profile.locale}}</v-flex>
                             <v-flex><b>Gender:</b> {{profile.gender}}</v-flex>
                             <v-flex><b>LastVisit:</b> {{profile.lastVisit}}</v-flex>
-                            <v-flex><b>subscriptions:</b> {{profile.subscriptions && profile.subscriptions.length}}
+                            <v-flex>
+                                <b>subscriptions:</b>
+                                {{profile.subscriptions && profile.subscriptions.length}}
                             </v-flex>
-                            <v-flex><b>subscribers:</b> {{profile.subscribers && profile.subscribers.length}}</v-flex>
+                            <router-link
+                                    v-if="isMyProfile"
+                                    :to="`/subscriptions/${profile.id}`"
+                            >
+                                {{profile.subscribers && profile.subscribers.length}}
+                            </router-link>
+                            <v-flex v-else>
+                                <b>subscribers:</b>
+                                {{profile.subscribers && profile.subscribers.length}}
+                            </v-flex>
                         </v-layout>
                     </v-flex>
                 </v-layout>

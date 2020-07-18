@@ -51,7 +51,7 @@ public class MessageService {
     ) {
         this.messageRepository = messageRepository;
         this.userSubscriptionRepo = userSubscriptionRepo;
-        this.wsSender = wsSender.getSender(ObjectType.MESSAGE, Views.IdName.class);
+        this.wsSender = wsSender.getSender(ObjectType.MESSAGE, Views.FullMessage.class);
     }
 
 
@@ -64,7 +64,7 @@ public class MessageService {
     public Message updateMessage(Long messageId, Message message) throws IOException {
 
         Message messageFromDb = messageRepository.findById(messageId).get();
-        BeanUtils.copyProperties(message, messageFromDb, "id");
+        messageFromDb.setText(message.getText());
         fillMeta(messageFromDb);
         Message updatedMessage = messageRepository.save(messageFromDb);
 
@@ -131,6 +131,7 @@ public class MessageService {
     public MessagePageDto findForUser(Pageable pageable, User user) {
         List<User> channels = userSubscriptionRepo.findBySubscriber(user)
                 .stream()
+                .filter(UserSubscription::isActive)
                 .map(UserSubscription::getChannel)
                 .collect(Collectors.toList());
 
