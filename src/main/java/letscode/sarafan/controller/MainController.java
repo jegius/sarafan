@@ -31,7 +31,7 @@ public class MainController {
     private final ObjectWriter profileWriter;
     private final UserDetailsRepo userDetailsRepo;
 
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:prod}")
     private String profile;
 
     @Autowired

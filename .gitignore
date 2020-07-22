@@ -35,3 +35,4 @@ out/
 
 # Project exclude paths
 /node_modules/
+/src/main/resources/static/js/
