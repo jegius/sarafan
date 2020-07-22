@@ -10,7 +10,7 @@ node {
 }
 
 task buildFront(type: NpmTask) {
-	args = ['build']
+	args = ['run', 'build']
 }
 
 npm_install.dependsOn(npm_cache_verify)
